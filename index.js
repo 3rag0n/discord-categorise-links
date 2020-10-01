@@ -11,26 +11,16 @@ client.once('ready', () => {
 
 client.on('message', (message) => {
 	if (message.author.bot) return;
-	if (message.content == "theboiz"){
-		giphy.random('gifs', {'q':"The Boys"})
+	if (message.content === prefix + 'theboiz'){
+		giphy.random('gifs', {'tag':"The Boys"})
 			.then((response) => {
-				//message.channel.send("WORK");
 				console.log(response);
-				message.channel.send("BOIZ",{
-					files: [response.images.fixed_height.url]
-			});
-
-			
-			//var totalResponses = response.data.length; 
-			//var responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses; 
-			//var responseFinal = response.data[responseIndex]; 
-			
-			//message.channel.send("BOIZ", {
-			//	files: [responseFinal.images.fixed_height.url]
-		}).catch(() => {
+				message.channel.send("BOIZ");
+				message.channel.send(response.data.url);
+			}).catch(() => {
 			message.channel.send("fail");
 		})
-	}else message.channel.send("error");
+	}
 
 })
 client.login(token);
